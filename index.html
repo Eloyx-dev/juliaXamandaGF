@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Declarações de Amor</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Georgia", serif;
+                background: linear-gradient(
+                    135deg,
+                    #1a1a2e 0%,
+                    #16213e 50%,
+                    #0f3460 100%
+                );
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #e0e0e0;
+                overflow-x: hidden;
+            }
+
+            .container {
+                max-width: 1200px;
+                width: 100%;
+                padding: 40px 20px;
+            }
+
+            .header {
+                text-align: center;
+                margin-bottom: 60px;
+                animation: fadeInDown 1s ease-out;
+            }
+
+            .header h1 {
+                font-size: 3.5em;
+                color: #ff6b9d;
+                text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+                margin-bottom: 10px;
+                font-weight: normal;
+                letter-spacing: 2px;
+            }
+
+            .header p {
+                font-size: 1.2em;
+                color: #c9ada7;
+                font-style: italic;
+            }
+
+            .declarations {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                margin-bottom: 40px;
+            }
+
+            .declaration {
+                background: rgba(255, 255, 255, 0.05);
+                border: 2px solid rgba(255, 107, 157, 0.3);
+                border-radius: 15px;
+                padding: 50px 40px;
+                backdrop-filter: blur(10px);
+                transition: all 0.4s ease;
+                position: relative;
+                overflow: hidden;
+                animation: slideIn 1s ease-out;
+            }
+
+            .declaration::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 107, 157, 0.1),
+                    transparent
+                );
+                transition: left 0.5s ease;
+            }
+
+            .declaration:hover::before {
+                left: 100%;
+            }
+
+            .declaration:hover {
+                border-color: rgba(255, 107, 157, 0.6);
+                box-shadow: 0 8px 30px rgba(255, 107, 157, 0.2);
+                transform: translateY(-5px);
+            }
+
+            .name {
+                font-size: 2em;
+                color: #ff6b9d;
+                margin-bottom: 15px;
+                font-weight: normal;
+            }
+
+            .name-to {
+                font-size: 1.3em;
+                color: #c9ada7;
+                font-style: italic;
+                margin-bottom: 30px;
+                opacity: 0.9;
+            }
+
+            .text {
+                font-size: 1.1em;
+                line-height: 1.8;
+                color: #e0e0e0;
+                text-align: justify;
+                margin-bottom: 25px;
+            }
+
+            .heart {
+                display: inline-block;
+                color: #ff6b9d;
+                animation: heartbeat 1.5s infinite;
+                margin: 0 5px;
+            }
+
+            .separator {
+                text-align: center;
+                margin: 40px 0;
+                font-size: 2em;
+                color: #ff6b9d;
+                opacity: 0.6;
+            }
+
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .declaration:nth-child(2) {
+                animation: slideInRight 1s ease-out;
+            }
+
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes heartbeat {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.2);
+                }
+            }
+
+            .footer {
+                text-align: center;
+                color: #9b8c8c;
+                font-size: 0.95em;
+                font-style: italic;
+                margin-top: 50px;
+            }
+
+            .floating-heart {
+                position: fixed;
+                pointer-events: none;
+                font-size: 2em;
+                color: #ff6b9d;
+                opacity: 0.6;
+                animation: float-up 3s ease-in forwards;
+            }
+
+            @keyframes float-up {
+                0% {
+                    transform: translateY(0) translateX(0);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: translateY(-100vh) translateX(100px);
+                    opacity: 0;
+                }
+            }
+
+            .quote-mark {
+                font-size: 3em;
+                color: #ff6b9d;
+                opacity: 0.3;
+                line-height: 0.5;
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 768px) {
+                .declarations {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+
+                .header h1 {
+                    font-size: 2.5em;
+                }
+
+                .declaration {
+                    padding: 40px 30px;
+                }
+
+                .name {
+                    font-size: 1.6em;
+                }
+
+                .text {
+                    font-size: 1em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Declarações de Amor</h1>
+                <p>Quando o coração fala, as palavras se tornam poesia</p>
+            </div>
+
+            <div class="declarations">
+                <div class="declaration">
+                    <div class="quote-mark">"</div>
+                    <div class="name">Ítalo</div>
+                    <div class="name-to">Para Julia</div>
+                    <p class="text">
+                        Julia, meu amor, as palavras não conseguem descrever o
+                        vazio que sinto quando você não está aqui. Sinto falta
+                        do seu calor, daquele calor que só você sabe me dar, que
+                        aquece meu coração nos dias mais frios.
+                        <span class="heart">♥</span>
+                    </p>
+                    <p class="text">
+                        Sinto falta da sua voz linda, melodia que toca minha
+                        alma e me faz lembrar por que existo. Cada palavra sua é
+                        um beijo, cada riso seu é um abraço que me envolve
+                        completamente. Sinto falta do seu amor, daquele amor
+                        puro e verdadeiro que nos une.
+                    </p>
+                    <p class="text">
+                        Quero você de volta. Quero sentir você novamente.
+                    </p>
+                    <p
+                        style="
+                            text-align: center;
+                            margin-top: 30px;
+                            font-style: italic;
+                            color: #ff6b9d;
+                        "
+                    >
+                        Te amo eternamente <span class="heart">♥</span>
+                    </p>
+                </div>
+
+                <div class="declaration">
+                    <div class="quote-mark">"</div>
+                    <div class="name">Gustavo</div>
+                    <div class="name-to">Para Amanda</div>
+                    <p class="text">
+                        Amanda, você é a razão pela qual meu coração bate mais
+                        forte a cada dia. Sinto falta da sua voz, daquele som
+                        que é música para meus ouvidos e bálsamo para minha
+                        alma.
+                        <span class="heart">♥</span>
+                    </p>
+                    <p class="text">
+                        Sinto falta da sua presença, daquela sensação de estar
+                        completo quando você está ao meu lado. Você não é apenas
+                        uma pessoa em minha vida, você é minha vida. Você é o ar
+                        que respiro, a luz que me guia, o amor que me faz ser
+                        quem sou.
+                    </p>
+                    <p class="text">
+                        Cada momento sem você é uma eternidade. Quero ouvir sua
+                        voz novamente, quero sentir sua presença, quero apenas
+                        estar com você.
+                    </p>
+                    <p
+                        style="
+                            text-align: center;
+                            margin-top: 30px;
+                            font-style: italic;
+                            color: #ff6b9d;
+                        "
+                    >
+                        Você é meu tudo <span class="heart">♥</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="separator">♥ ♥ ♥</div>
+
+            <div class="footer">
+                <p>
+                    O verdadeiro amor não desaparece com a distância, apenas
+                    cresce mais forte a cada dia que passa.
+                </p>
+            </div>
+        </div>
+
+        <script>
+            // Criar corações flutuantes aleatoriamente
+            function createFloatingHeart() {
+                const heart = document.createElement("div");
+                heart.className = "floating-heart";
+                heart.textContent = "♥";
+                heart.style.left = Math.random() * 100 + "%";
+                heart.style.top = window.innerHeight + "px";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+
+            // Criar um coração flutuante a cada 2-3 segundos
+            setInterval(createFloatingHeart, 2500);
+
+            // Efeito suave de scroll
+            document.querySelectorAll(".declaration").forEach((el, index) => {
+                el.style.animationDelay = index * 0.2 + "s";
+            });
+
+            // Adicionar interatividade ao hover das declarações
+            document.querySelectorAll(".declaration").forEach((declaration) => {
+                declaration.addEventListener("click", function () {
+                    // Criar múltiplos corações ao clicar
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            createFloatingHeart();
+                        }, i * 100);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
